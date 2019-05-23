@@ -1,0 +1,22 @@
+#canvas{
+  background: #1f7fe6a4;
+}
+*{
+  margin: 0;
+  padding: 0;
+}
+#actions{
+  position: fixed;
+  top:20px;
+  left: 20px;
+}
+.actions > #brush{
+  display: none;
+}
+
+.actions.x >#brush{
+  display: block;
+}
+.actions.x >#eraser{
+  display: none;
+}
