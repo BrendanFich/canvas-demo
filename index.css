@@ -1,5 +1,5 @@
 #canvas{
-  background: #1f7fe6a4;
+  display: block;
 }
 *{
   margin: 0;
@@ -11,12 +11,27 @@
   left: 20px;
 }
 .actions > #brush{
-  display: none;
+  color: red;
+  width: 2em; 
+  height: 2em;
+  transition: all 0.3s;
 }
 
 .actions.x >#brush{
-  display: block;
+  color: black;
+  width: 1.5em; 
+  height: 1.5em;
 }
 .actions.x >#eraser{
-  display: none;
+ color: red;
+ width: 2em; 
+ height: 2em;
+ transition: all 0.3s;
+}
+.icon {
+  width: 1.5em; height: 1.5em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  margin: 0 10px;
 }

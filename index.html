@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html lang="zh">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
   <link rel="stylesheet" href="./index.css">
   <title>画板</title>
 </head>
+
 <body>
   <canvas id="canvas" width="300px" height="300px"></canvas>
   <div id="actions" class="actions">
-    <button id="eraser">橡皮</button>
-    <button id="brush">画笔</button>
+    <!-- <button id="eraser">橡皮</button>
+    <button id="brush">画笔</button> -->
+    <svg id="brush" class="icon">
+      <use xlink:href="#icon-pen"></use>
+    </svg>
+    <svg id="eraser" class="icon">
+      <use xlink:href="#icon-eraser"></use>
+    </svg>
   </div>
   <script src="./index.js"></script>
+  <script src="//at.alicdn.com/t/font_1208195_yfpgwmgznpi.js"></script>
 </body>
+
 </html>
