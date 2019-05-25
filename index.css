@@ -1,37 +1,99 @@
-#canvas{
-  display: block;
-}
 *{
   margin: 0;
   padding: 0;
+}
+#canvas{
+  display: block;
 }
 #actions{
   position: fixed;
   top:20px;
   left: 20px;
 }
+#actions > svg{
+  margin: 0 12px;
+}
 .actions > #brush{
-  color: red;
-  width: 2em; 
-  height: 2em;
+  transform: scale(1.5);
   transition: all 0.3s;
 }
 
 .actions.x >#brush{
-  color: black;
-  width: 1.5em; 
-  height: 1.5em;
+  transform: scale(1);
 }
 .actions.x >#eraser{
- color: red;
- width: 2em; 
- height: 2em;
- transition: all 0.3s;
+  transform: scale(1.5);
+  transition: all 0.3s;
 }
 .icon {
   width: 1.5em; height: 1.5em;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
-  margin: 0 10px;
 }
+
+.colors{
+  position: fixed;
+  top: 60px;
+  left: 30px;
+}
+
+.colors> li{
+  list-style: none;
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid black;
+  border-radius: 50%;
+  margin: 10px 0;
+  transition: all 0.3s;
+}
+
+.black{
+  background: #4c4c4c;
+}
+.red{
+  background: red;
+}
+.green{
+  background: green;
+}
+.blue{
+  background: blue;
+}
+
+.colors .active{
+  transform: scale(1.2)
+}
+
+
+
+.penWidth{
+  position: fixed;
+  top: 60px;
+  left: 70px;
+}
+
+.penWidth> li{
+  list-style: none;
+  width: 30px;
+  height: 2px;
+  margin: 20px 0;
+  transition: all 0.3s;
+  background: #4c4c4c;
+  border: 2px solid black;
+  padding: 1px;
+}
+
+.penWidth > .min{
+  height: 1px;
+}
+.penWidth > .mid{
+  height: 5px;
+}
+.penWidth > .max{
+  height: 8px;
+}
+.penWidth > .active{
+  width: 50px;
+}
+
