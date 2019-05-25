@@ -1,9 +1,6 @@
 var canvas = document.getElementById('canvas')
 var context = canvas.getContext('2d')
 
-
-
-
 /*自动将canvas的大小设置成窗口大小*/
 autoSetCanvasSize()
 function autoSetCanvasSize() {
@@ -17,11 +14,10 @@ function autoSetCanvasSize() {
   window.onresize = setCanvasSize
 }
 
-
 /*初始化画板底色,必须写在autoSetCanvasSize()之后*/
-context.fillStyle = 'white'
+var baseColor = 'white'
+context.fillStyle = baseColor
 context.fillRect(0,0,canvas.width,canvas.height)
-
 
 /*初始化画笔颜色，线宽，编辑状态*/
 var penColor = '#4c4c4c'
@@ -42,10 +38,12 @@ var brush = document.querySelector('#brush')
 eraser.onclick = function () {
   eraserEnabled = true
   actions.className = 'actions x'
+  setWidthToolColor(baseColor)
 }
 brush.onclick = function () {
   eraserEnabled = false
   actions.className = 'actions'
+  setWidthToolColor(penColor)
 }
 
 function drawPoint(x,y,color,width){
@@ -72,12 +70,12 @@ function draw(lastX, lastY, x, y, color, width) {
 }
 /*擦除*/
 function erase(lastX, lastY, x, y, width) {
-  if (!width) { width = 10 }
+  if (!width) { width = penWidth }
   draw(lastX, lastY, x, y, 'white', width)
 }
 
 
-/*绑定鼠标事件*/
+/*绑定PC端鼠标事件*/
 function listenerMouse() {
   var using = false
   var lastPoint = { x: undefined, y: undefined }
@@ -95,6 +93,12 @@ function listenerMouse() {
   canvas.onmousemove = function (e) {
     var x = e.clientX
     var y = e.clientY
+
+    /*确保鼠标移出窗口时已完成点击移动松开这一套流程，防止影响下一次事件触发*/
+    if(x<10 || x>canvas.width-10 || y<10 || y> canvas.Height-10){
+      canvas.onmouseup()
+    }
+
     var newPoint = { x: x, y: y }
     if (using) {
       if (eraserEnabled) {
@@ -183,12 +187,13 @@ function changeColor(color, colorButton) {
   penColor = color
   brush.style.color = penColor
   actions.className = 'actions'
-
-  min.style.background = penColor
-  mid.style.background = penColor
-  max.style.background = penColor
+  setWidthToolColor(penColor)
 }
-
+function setWidthToolColor(color){
+  min.style.background = color
+  mid.style.background = color
+  max.style.background = color
+}
 /*线宽选择模块*/
 var ul = document.querySelector('.penWidth')
 var min = document.querySelector('.min')
@@ -237,12 +242,29 @@ download.onclick = function(){
   /*触发后销除*/
   document.body.removeChild(a)
 }
+
+/*禁止手机浏览器中的滑动事件触发（右滑返回，下滑刷新等）*/
 var mo=function(e){e.preventDefault();}
-
-/***禁止滑动***/
-
 function stop(){
-  document.addEventListener("touchmove",mo,false);//禁止页面滑动
-
+  document.addEventListener("touchmove",mo,false);
 }
 stop()
+
+/*隐藏色板及线宽工具*/
+var up = document.querySelector('#up')
+var down = document.querySelector('#down')
+var colors = document.querySelector('.colors')
+
+up.onclick = function(){
+  down.style.display = 'inline'
+  up.style.display = 'none'
+  colors.style.display = 'none'
+  ul.style.display = 'none'
+}
+
+down.onclick = function(){
+  up.style.display = 'inline'
+  down.style.display = 'none'
+  colors.style.display = 'block'
+  ul.style.display = 'block'
+}
